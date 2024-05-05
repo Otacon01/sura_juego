@@ -8,6 +8,8 @@ public class EntrarCarro : MonoBehaviour
 {
     public TinyCarController carroControlador;
     public Transform carro;
+    public Transform ubicacionPersonaje;
+
     public UnityEvent acercoCarro;
     public UnityEvent alejoCarro;
     public UnityEvent entroCarro;
@@ -15,15 +17,28 @@ public class EntrarCarro : MonoBehaviour
 
     private Transform personaje;
     private bool contacto;
+    private bool dentroDelCarro;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && carroControlador.getMotor() == 0)
         {
-            if (contacto == true)
+            if (contacto == true && dentroDelCarro == false)
             {
+                contacto = false;
+                dentroDelCarro = true;
                 entroCarro.Invoke();
                 personaje.SetParent(carro);
                 personaje.gameObject.SetActive(false);
+            }
+            else if (contacto == false && dentroDelCarro == true)
+            {
+                dentroDelCarro = false;
+                salioCarro.Invoke();
+                personaje.SetParent(null);
+                personaje.gameObject.SetActive(true);
+
+                personaje.position = ubicacionPersonaje.position;
+                personaje.rotation = ubicacionPersonaje.rotation;
             }
         }
     }

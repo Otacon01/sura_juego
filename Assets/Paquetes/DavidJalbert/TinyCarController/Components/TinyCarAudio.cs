@@ -57,7 +57,7 @@ namespace DavidJalbert
         {
             audioSourceTemplate = GetComponent<AudioSource>();
 
-            sourceEngine = carController.gameObject.AddComponent<AudioSource>();
+            sourceEngine = gameObject.AddComponent<AudioSource>();
             setAudioSourceFromTemplate(ref sourceEngine, audioSourceTemplate);
             sourceEngine.playOnAwake = false;
             sourceEngine.loop = true;
@@ -66,7 +66,7 @@ namespace DavidJalbert
 
             sourceEngine.Play();
 
-            sourceBrake = carController.gameObject.AddComponent<AudioSource>();
+            sourceBrake = gameObject.AddComponent<AudioSource>();
             setAudioSourceFromTemplate(ref sourceBrake, audioSourceTemplate);
             sourceBrake.playOnAwake = false;
             sourceBrake.loop = true;
@@ -75,7 +75,7 @@ namespace DavidJalbert
 
             sourceBrake.Play();
 
-            sourceGrinding = carController.gameObject.AddComponent<AudioSource>();
+            sourceGrinding = gameObject.AddComponent<AudioSource>();
             setAudioSourceFromTemplate(ref sourceGrinding, audioSourceTemplate);
             sourceGrinding.playOnAwake = false;
             sourceGrinding.loop = true;
@@ -84,17 +84,32 @@ namespace DavidJalbert
 
             sourceGrinding.Play();
 
-            sourceBump = carController.gameObject.AddComponent<AudioSource>();
+            sourceBump = gameObject.AddComponent<AudioSource>();
             setAudioSourceFromTemplate(ref sourceBump, audioSourceTemplate);
             sourceBump.playOnAwake = false;
             sourceBump.loop = false;
             sourceBump.clip = bumpSound;
 
-            sourceLanding = carController.gameObject.AddComponent<AudioSource>();
+            sourceLanding = gameObject.AddComponent<AudioSource>();
             setAudioSourceFromTemplate(ref sourceLanding, audioSourceTemplate);
             sourceLanding.playOnAwake = false;
             sourceLanding.loop = false;
             sourceLanding.clip = bumpSound;
+        }
+
+        public void turnOffOnSound(bool value)
+        {
+            if (value == true)
+            {
+                sourceEngine.Play();
+                sourceBrake.Play();
+                sourceGrinding.Play();
+            }
+            else {
+                sourceEngine.Stop();
+                sourceBrake.Stop();
+                sourceGrinding.Stop();
+            }
         }
 
         void Update()
