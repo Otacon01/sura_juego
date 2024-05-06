@@ -10,6 +10,7 @@ public class VerificarCantidadElementos : MonoBehaviour
     public UnityEvent terminoRecolectar;
     public Text cantidadElementos;
     public int cont;
+
     public void Verificar()
     {
         int cantidad = 0;
