@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class VerificarCantidadElementos : MonoBehaviour
 {
+    public ManejadorJuego manejador;
     public GameObject[] objetos;
     public UnityEvent terminoRecolectar;
     public Text cantidadElementos;
@@ -23,7 +24,12 @@ public class VerificarCantidadElementos : MonoBehaviour
         }
         cont = cantidad;
         cantidadElementos.text = cantidad + "/" + objetos.Length;
-        if (cantidad == objetos.Length)
-            terminoRecolectar.Invoke();
+        if (cantidad == objetos.Length)        
+            terminoRecolectar.Invoke(); 
+    }
+
+    public void CalcularPuntaje()
+    {
+        manejador.CalcularPuntaje(cont);
     }
 }
